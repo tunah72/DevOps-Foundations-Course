@@ -1,0 +1,56 @@
+# TODO-STEP 1: Define the Workflow Name
+name: Python CI/CD Pipeline
+
+# TODO-STEP 2: Define the Trigger Events
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Build job
+  # TODO-STEP 3: Create your "Build" job
+  build:
+    # TODO-STEP 3a: Specify the runner for this job
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    # TODO-STEP 3b: Enter a name for your step
+    - name: Install dependencies
+      # TODO-STEP 3c: Add commands to install dependencies
+      run: |
+        python -m pip install --upgrade pip  
+        pip install -r requirements.txt
+
+  # Test job
+  # TODO-STEP 4: Create your "Test" job
+  test:
+    # TODO-STEP 4a: Ensure this job runs after the build job.
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    # TODO-STEP 4b: Add command to install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # TODO-STEP 4c: Add command to run tests
+    - name: Run tests
+      run: pytest
