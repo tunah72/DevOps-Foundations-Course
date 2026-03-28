@@ -26,7 +26,8 @@ jobs:
     - name: Install dependencies
       # TODO-STEP 3c: Add commands to install dependencies
       run: |
-        python -m pip install --upgrade pip  
+        python -m pip install --upgrade pip 
+        cd "Week 1/GitHub Actions Practice"
         pip install -r requirements.txt
 
   # Test job
